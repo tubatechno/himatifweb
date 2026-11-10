@@ -1,20 +1,29 @@
 <script setup lang="ts">
-useSeoMeta({
-  title: 'FTJ Himatif | Beyond Code: Empowering Digital Talents',
-  ogTitle: 'FTJ Himatif',
-  ogDescription: 'Beyond Code: Empowering Digital Talents'
-})
+import { EVENT_DATA } from '~/data/event'
 
-const year = new Date().getFullYear()
+useSeoMeta({
+  title: `${EVENT_DATA.nama} (${EVENT_DATA.singkatan}) | ${EVENT_DATA.tagline}`,
+  ogTitle: `${EVENT_DATA.nama} (${EVENT_DATA.singkatan}) 2026`,
+  description: `Kompetisi Web Development dan Game Development ${EVENT_DATA.nama} (FTJ 2026). Diselenggarakan oleh ${EVENT_DATA.penyelenggara}, tuan rumah ${EVENT_DATA.tuanRumah} (${EVENT_DATA.institusiTuanRumah}).`,
+  ogDescription: `Daftarkan tim kamu pada ajang ${EVENT_DATA.nama} 2026: ${EVENT_DATA.tagline}. Pelaksanaan ${EVENT_DATA.tanggalTeks}.`
+})
 </script>
 
 <template>
-  <main class="min-h-screen bg-mist font-sans text-ink">
-    <Hero />
-    <TermAndCondition />
-    <RegistrationForm />
-    <footer class="bg-ink px-6 py-8 text-center text-sm text-white/80">
-      &copy; {{ year }} FTJ Himatif. Beyond Code: Empowering Digital Talents.
-    </footer>
-  </main>
+  <div class="min-h-screen bg-mist font-sans text-ink">
+    <SiteNavbar />
+    <main>
+      <Hero />
+      <AboutSection />
+      <TermAndCondition />
+      <ScheduleSection />
+      <RegistrationForm />
+      <DocumentationSection />
+      <LocationSection />
+      <OrganizerSection />
+      <FaqSection />
+      <ContactSection />
+    </main>
+    <SiteFooter />
+  </div>
 </template>

@@ -17,12 +17,21 @@ const onKey = (e: KeyboardEvent, i: number) => {
 </script>
 
 <template>
-  <section id="juknis" class="bg-mist px-6 py-20 md:py-28">
+  <section id="juknis" class="border-b-2 border-ink bg-mist px-6 py-20 md:py-28">
     <div class="mx-auto max-w-5xl">
-      <h2 class="font-display text-4xl font-extrabold text-ink md:text-5xl">Syarat dan Ketentuan</h2>
-      <p class="mt-3 max-w-xl font-sans text-ink-600">Baca juknis kategori yang kamu pilih sebelum mendaftar.</p>
+      <div class="max-w-2xl">
+        <span class="rounded-sm bg-azure px-3 py-1 font-sans text-xs font-bold uppercase tracking-wider text-white">
+          Petunjuk Teknis
+        </span>
+        <h2 class="mt-4 font-display text-4xl font-extrabold text-ink md:text-5xl">
+          Syarat & Ketentuan Lomba
+        </h2>
+        <p class="mt-3 font-sans text-base text-ink-600 md:text-lg">
+          Pilih kategori lomba di bawah ini untuk membaca rangkuman petunjuk teknis. Memilih tab akan otomatis menyesuaikan pilihan pada formulir pendaftaran.
+        </p>
+      </div>
 
-      <div role="tablist" aria-label="Kategori lomba" class="mt-10 flex border-b-2 border-ink">
+      <div role="tablist" aria-label="Kategori Lomba" class="mt-10 flex border-b-2 border-ink">
         <button
           v-for="(c, i) in CATEGORIES"
           :id="`tab-${i}`"
@@ -34,7 +43,7 @@ const onKey = (e: KeyboardEvent, i: number) => {
           :aria-selected="active === c"
           :tabindex="active === c ? 0 : -1"
           :class="[
-            'px-5 py-3 font-sans font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-azure md:px-8',
+            'px-5 py-3 font-sans text-sm font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-azure md:px-8 md:text-base',
             active === c ? 'bg-ink text-white' : 'text-ink hover:bg-ink/10'
           ]"
           @click="active = c"
@@ -53,10 +62,19 @@ const onKey = (e: KeyboardEvent, i: number) => {
           tabindex="0"
           class="pt-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-azure"
         >
-          <p class="max-w-2xl font-sans text-lg text-ink">{{ content.ringkasan }}</p>
+          <p class="max-w-3xl font-sans text-lg font-medium text-ink">
+            {{ content.ringkasan }}
+          </p>
+
           <div class="mt-8 grid gap-6 md:grid-cols-3">
-            <article v-for="b in content.bagian" :key="b.judul" class="rounded-sm border-2 border-ink bg-white p-6 shadow-[4px_4px_0_0_#14183A]">
-              <h3 class="font-display text-xl font-bold text-ink">{{ b.judul }}</h3>
+            <article
+              v-for="b in content.bagian"
+              :key="b.judul"
+              class="rounded-sm border-2 border-ink bg-white p-6 shadow-[4px_4px_0_0_#14183A]"
+            >
+              <h3 class="font-display text-xl font-bold text-ink">
+                {{ b.judul }}
+              </h3>
               <ul class="mt-4 list-disc space-y-2 pl-5 font-sans text-sm leading-relaxed text-ink/90">
                 <li v-for="t in b.butir" :key="t">{{ t }}</li>
               </ul>

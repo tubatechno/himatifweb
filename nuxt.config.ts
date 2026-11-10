@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   devtools: { enabled: false },
   nitro: {
-    preset: 'cloudflare-module'
+    preset: 'cloudflare_module'
   },
   modules: ['@nuxtjs/tailwindcss'],
   runtimeConfig: {
@@ -12,11 +12,19 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'id' },
-      title: 'FTJ Himatif | Beyond Code: Empowering Digital Talents',
+      title: 'Festival Teknologi Jawa Tengah | Beyond Code: Empowering Digital Talents',
       meta: [
         {
           name: 'description',
-          content: 'Pendaftaran kompetisi Web Development dan Game Development FTJ Himatif: Beyond Code, Empowering Digital Talents.'
+          content: 'Pendaftaran kompetisi Web Development dan Game Development Festival Teknologi Jawa Tengah (FTJ 2026). Diselenggarakan oleh Permikomnas Jateng, tuan rumah Himatif UMPKU Surakarta.'
+        },
+        {
+          property: 'og:title',
+          content: 'Festival Teknologi Jawa Tengah (FTJ 2026)'
+        },
+        {
+          property: 'og:description',
+          content: 'Festival Teknologi Jawa Tengah (FTJ 2026): Beyond Code: Empowering Digital Talents. Diselenggarakan oleh Permikomnas Jateng, tuan rumah Himatif UMPKU.'
         }
       ],
       link: [
