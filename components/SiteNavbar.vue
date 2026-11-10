@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EVENT_DATA } from '~/data/event'
+import { SITE_DATA } from '~/data/site'
 
 const route = useRoute()
 const isOpen = ref(false)
@@ -49,12 +49,19 @@ const isLinkActive = (href: string) => {
 <template>
   <header class="sticky top-0 z-50 border-b-2 border-ink bg-ink text-white">
     <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-      <NuxtLink to="/" class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal">
-        <span class="rounded-sm bg-signal px-2.5 py-1 font-display text-lg font-extrabold text-ink">
-          {{ EVENT_DATA.singkatan }}
-        </span>
-        <span class="hidden font-display text-sm font-bold tracking-tight text-white sm:inline md:text-base">
-          {{ EVENT_DATA.nama }}
+      <NuxtLink
+        to="/"
+        class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+      >
+        <img
+          :src="SITE_DATA.logo"
+          :alt="`Logo ${SITE_DATA.nama}`"
+          width="40"
+          height="40"
+          class="h-10 w-auto"
+        />
+        <span class="font-display text-lg font-bold tracking-tight text-white md:text-xl">
+          {{ SITE_DATA.nama }}
         </span>
       </NuxtLink>
 

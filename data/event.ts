@@ -1,3 +1,5 @@
+import { SITE_DATA } from './site'
+
 const latitude = -7.5337376
 const longitude = 110.8165727
 
@@ -55,8 +57,8 @@ export const EVENT_DATA: EventData = {
   singkatan: 'FTJ 2026',
   tagline: 'Beyond Code: Empowering Digital Talents',
   penyelenggara: 'Permikomnas Jateng',
-  tuanRumah: 'Himatif UMPKU',
-  institusiTuanRumah: 'Universitas Muhammadiyah PKU Surakarta',
+  tuanRumah: SITE_DATA.nama,
+  institusiTuanRumah: SITE_DATA.institusi,
   tanggalMulai: '2026-11-27T00:00:00+07:00',
   tanggalSelesai: '2026-11-30T23:59:59+07:00',
   tanggalTeks: '27 - 30 November 2026',
@@ -84,7 +86,7 @@ export const EVENT_DATA: EventData = {
   tentang: {
     ringkasan: 'Festival Teknologi Jawa Tengah (FTJ 2026) adalah ajang kompetisi teknologi informasi tingkat mahasiswa yang bertujuan mencetak dan memberdayakan talenta digital berdaya saing.',
     deskripsiLengkap: [
-      'Festival Teknologi Jawa Tengah merupakan agenda kolaboratif yang diselenggarakan oleh Permikomnas Wilayah Jawa Tengah. Pada edisi tahun 2026, Himatif UMPKU (Himpunan Mahasiswa Teknologi Informasi Universitas Muhammadiyah PKU Surakarta) bertindak sebagai tuan rumah penyelenggara.',
+      `Festival Teknologi Jawa Tengah merupakan agenda kolaboratif yang diselenggarakan oleh Permikomnas Wilayah Jawa Tengah. Pada edisi tahun 2026, ${SITE_DATA.nama} (${SITE_DATA.namaLengkap}, ${SITE_DATA.institusi}) bertindak sebagai tuan rumah penyelenggara.`,
       'Mengusung tema "Beyond Code: Empowering Digital Talents", FTJ 2026 memfokuskan kompetisi pada dua pilar pengembangan perangkat lunak modern: Web Development dan Game Development. Ajang ini menjadi wadah unjuk kebolehan, kolaborasi antarkampus, dan penjaringan inovator digital muda.'
     ]
   },
@@ -96,9 +98,9 @@ export const EVENT_DATA: EventData = {
       inisial: 'PKN'
     },
     {
-      nama: 'Himatif UMPKU',
+      nama: SITE_DATA.nama,
       peran: 'Tuan Rumah Pelaksana',
-      path: '/logos/Himatif.png',
+      path: SITE_DATA.logo,
       inisial: 'Himatif'
     },
     {

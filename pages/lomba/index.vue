@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { EVENT_DATA } from '~/data/event'
+import { SITE_DATA } from '~/data/site'
 import { slugToCategory, categoryToSlug } from '~/types/registration'
 
 useSeoMeta({
-  title: 'HIMATIF UMPKU',
+  title: SITE_DATA.nama,
   ogTitle: `Petunjuk Teknis & Pendaftaran Lomba ${EVENT_DATA.singkatan}`,
-  description: `Petunjuk teknis resmi dan formulir pendaftaran cabang Web Development dan Game Development ${EVENT_DATA.nama} 2026.`,
+  description: `Petunjuk teknis resmi dan formulir pendaftaran cabang Web Development dan Game Development ${EVENT_DATA.nama} 2026. Diselenggarakan oleh ${EVENT_DATA.penyelenggara}, tuan rumah ${SITE_DATA.nama} (${SITE_DATA.namaLengkap}).`,
   ogDescription: `Pelajari juknis lengkap dan daftarkan tim kamu pada ajang ${EVENT_DATA.nama} 2026.`
 })
 
