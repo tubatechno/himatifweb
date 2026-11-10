@@ -3,7 +3,7 @@ import { EVENT_DATA } from '~/data/event'
 import { slugToCategory, categoryToSlug } from '~/types/registration'
 
 useSeoMeta({
-  title: `Cabang Lomba & Pendaftaran | ${EVENT_DATA.nama} (${EVENT_DATA.singkatan})`,
+  title: 'HIMATIF UMPKU',
   ogTitle: `Petunjuk Teknis & Pendaftaran Lomba ${EVENT_DATA.singkatan}`,
   description: `Petunjuk teknis resmi dan formulir pendaftaran cabang Web Development dan Game Development ${EVENT_DATA.nama} 2026.`,
   ogDescription: `Pelajari juknis lengkap dan daftarkan tim kamu pada ajang ${EVENT_DATA.nama} 2026.`

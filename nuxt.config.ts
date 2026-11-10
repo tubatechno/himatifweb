@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'id' },
-      title: 'Festival Teknologi Jawa Tengah | Beyond Code: Empowering Digital Talents',
+      title: 'HIMATIF UMPKU',
       meta: [
         {
           name: 'description',
@@ -28,6 +28,8 @@ export default defineNuxtConfig({
         }
       ],
       link: [
+        { rel: 'icon', type: 'image/png', href: '/logos/Himatif.png' },
+        { rel: 'shortcut icon', href: '/favicon.ico' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
