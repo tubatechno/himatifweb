@@ -29,7 +29,7 @@ function doPost(e) {
     const data = JSON.parse(e.postData.contents);
     const secret = PropertiesService.getScriptProperties().getProperty('SHARED_SECRET');
     if (!secret || data.secret !== secret) {
-      return respond({ ok: false, error: 'unauthorized' });
+      return respond({ ok: false, error: 'Akses tidak diizinkan' });
     }
     const sheet = getSheet();
     sheet.appendRow([
@@ -37,7 +37,7 @@ function doPost(e) {
       data.namaTim,
       data.kategori,
       data.namaKetua,
-      String(data.whatsapp),
+      "'" + String(data.whatsapp),
       data.instansi
     ]);
     return respond({ ok: true });

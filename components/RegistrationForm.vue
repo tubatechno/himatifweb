@@ -4,11 +4,11 @@ import { CATEGORIES, type Category } from '~/types/registration'
 type Field = 'namaTim' | 'kategori' | 'namaKetua' | 'whatsapp' | 'instansi'
 
 const fields: { key: Field; label: string; id: string; type: string; placeholder: string }[] = [
-  { key: 'namaTim', label: 'Nama tim', id: 'nama-tim', type: 'text', placeholder: 'Contoh: Byte Hunters' },
-  { key: 'kategori', label: 'Kategori lomba', id: 'kategori', type: 'select', placeholder: '' },
-  { key: 'namaKetua', label: 'Nama ketua tim', id: 'nama-ketua', type: 'text', placeholder: 'Nama lengkap' },
+  { key: 'namaTim', label: 'Nama Tim', id: 'nama-tim', type: 'text', placeholder: 'Contoh: Byte Hunters' },
+  { key: 'kategori', label: 'Kategori Lomba', id: 'kategori', type: 'select', placeholder: '' },
+  { key: 'namaKetua', label: 'Nama Ketua Tim', id: 'nama-ketua', type: 'text', placeholder: 'Nama lengkap ketua' },
   { key: 'whatsapp', label: 'Nomor WhatsApp', id: 'whatsapp', type: 'tel', placeholder: '081234567890' },
-  { key: 'instansi', label: 'Asal instansi/universitas', id: 'instansi', type: 'text', placeholder: 'Nama kampus atau instansi' }
+  { key: 'instansi', label: 'Asal Instansi/Universitas', id: 'instansi', type: 'text', placeholder: 'Nama universitas atau instansi' }
 ]
 
 const blank = (): Record<Field, string> => ({ namaTim: '', kategori: '', namaKetua: '', whatsapp: '', instansi: '' })
@@ -36,12 +36,6 @@ const onBlur = (k: Field) => {
 const onInput = (k: Field) => {
   if (touched[k]) check(k)
 }
-
-const activeCategory = useActiveCategory()
-watch(activeCategory, (v) => {
-  form.kategori = v
-  errors.kategori = ''
-})
 
 const { loading, status, message, submit, dismiss } = useRegistration()
 
@@ -72,31 +66,34 @@ const onSubmit = async () => {
   <section id="daftar" class="bg-white px-6 py-20 md:py-28">
     <div class="mx-auto grid max-w-5xl gap-12 md:grid-cols-5">
       <div class="md:col-span-2">
-        <h2 class="font-display text-4xl font-extrabold md:text-5xl">Daftarkan tim kamu</h2>
-        <p class="mt-4 text-ink-600">
+        <h2 class="font-display text-4xl font-extrabold text-ink md:text-5xl">Daftarkan Tim Kamu</h2>
+        <p class="mt-4 font-sans text-ink-600">
           Isi data tim dengan benar. Panitia akan menghubungi ketua tim melalui WhatsApp.
         </p>
       </div>
 
       <form
         novalidate
-        class="border-2 border-ink p-6 shadow-[8px_8px_0_0_#14183A] md:col-span-3 md:p-10"
+        class="rounded-sm border-2 border-ink p-6 shadow-[8px_8px_0_0_#14183A] md:col-span-3 md:p-10"
         @submit.prevent="onSubmit"
       >
         <div class="space-y-6">
           <div v-for="f in fields" :key="f.key">
-            <label :for="f.id" class="mb-2 block text-sm font-semibold">{{ f.label }}</label>
+            <label :for="f.id" class="mb-2 block font-sans text-sm font-semibold text-ink">{{ f.label }}</label>
             <select
               v-if="f.type === 'select'"
               :id="f.id"
               v-model="form.kategori"
               :aria-invalid="!!errors.kategori"
               :aria-describedby="errors.kategori ? `${f.id}-error` : undefined"
-              :class="['w-full border-2 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-azure/40', errors.kategori ? 'border-danger' : 'border-ink']"
+              :class="[
+                'w-full rounded-sm border-2 bg-white px-4 py-3 font-sans text-ink outline-none transition-colors focus:ring-2 focus:ring-azure/40',
+                errors.kategori ? 'border-coral' : 'border-ink'
+              ]"
               @input="onInput('kategori')"
               @blur="onBlur('kategori')"
             >
-              <option value="" disabled>Pilih kategori</option>
+              <option value="" disabled>Pilih kategori lomba</option>
               <option v-for="c in CATEGORIES" :key="c" :value="c">{{ c }}</option>
             </select>
             <input
@@ -108,11 +105,14 @@ const onSubmit = async () => {
               :inputmode="f.type === 'tel' ? 'tel' : undefined"
               :aria-invalid="!!errors[f.key]"
               :aria-describedby="errors[f.key] ? `${f.id}-error` : undefined"
-              :class="['w-full border-2 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-azure/40', errors[f.key] ? 'border-danger' : 'border-ink']"
+              :class="[
+                'w-full rounded-sm border-2 bg-white px-4 py-3 font-sans text-ink outline-none transition-colors focus:ring-2 focus:ring-azure/40',
+                errors[f.key] ? 'border-coral' : 'border-ink'
+              ]"
               @input="onInput(f.key)"
               @blur="onBlur(f.key)"
             />
-            <p v-if="errors[f.key]" :id="`${f.id}-error`" class="mt-1 text-sm font-medium text-danger">
+            <p v-if="errors[f.key]" :id="`${f.id}-error`" class="mt-1 font-sans text-sm font-medium text-coral">
               {{ errors[f.key] }}
             </p>
           </div>
@@ -121,22 +121,25 @@ const onSubmit = async () => {
         <div
           v-if="status !== 'idle'"
           :role="status === 'error' ? 'alert' : 'status'"
-          :class="['mt-6 flex items-start justify-between gap-4 rounded-sm px-4 py-3 text-sm font-medium text-white', status === 'success' ? 'bg-ok' : 'bg-danger']"
+          :class="[
+            'mt-6 flex items-start justify-between gap-4 rounded-sm px-4 py-3 font-sans text-sm font-semibold',
+            status === 'success' ? 'bg-azure text-white' : 'bg-coral text-ink'
+          ]"
         >
           <span>{{ message }}</span>
-          <button type="button" class="font-bold underline" @click="dismiss">Tutup</button>
+          <button type="button" class="underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ink" @click="dismiss">Tutup</button>
         </div>
 
         <button
           type="submit"
           :disabled="loading"
-          class="mt-8 flex w-full items-center justify-center gap-3 rounded-sm bg-ink px-8 py-4 text-lg font-bold text-white transition-colors hover:bg-azure focus:outline-none focus-visible:ring-4 focus-visible:ring-azure/40 disabled:cursor-not-allowed disabled:opacity-60"
+          class="mt-8 flex w-full items-center justify-center gap-3 rounded-sm bg-ink px-8 py-4 font-sans text-lg font-bold text-white transition-colors hover:bg-azure focus:outline-none focus-visible:ring-4 focus-visible:ring-azure/40 disabled:cursor-not-allowed disabled:opacity-60"
         >
           <svg v-if="loading" class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" opacity="0.3" />
             <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" />
           </svg>
-          {{ loading ? 'Mengirim...' : 'Kirim pendaftaran' }}
+          {{ loading ? 'Mengirim...' : 'Kirim Pendaftaran' }}
         </button>
       </form>
     </div>

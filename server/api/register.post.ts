@@ -7,7 +7,7 @@ const safeCell = (v: string) => (/^[=+\-@]/.test(v) ? `'${v}` : v)
 
 const normalizePhone = (raw: string) => {
   const d = raw.replace(/[\s-]/g, '').replace(/^\+/, '')
-  return d.startsWith('0') ? `62${d.slice(1)}` : d
+  return d.startsWith('0') ? `62${d.slice(1)}` : d.startsWith('62') ? d : `62${d}`
 }
 
 export default defineEventHandler(async (event) => {
@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
     instansi.length >= 3
 
   if (!valid) {
-    throw createError({ statusCode: 400, statusMessage: 'Data pendaftaran tidak valid. Periksa kembali isian form.' })
+    throw createError({ statusCode: 400, statusMessage: 'Data pendaftaran tidak valid. Periksa kembali isian formulir.' })
   }
 
   try {
@@ -50,8 +50,8 @@ export default defineEventHandler(async (event) => {
     })
     if (!res || res.ok !== true) throw new Error('rejected')
   } catch {
-    throw createError({ statusCode: 502, statusMessage: 'Data belum tersimpan. Coba lagi beberapa saat lagi.' })
+    throw createError({ statusCode: 502, statusMessage: 'Data pendaftaran belum tersimpan. Coba lagi beberapa saat lagi.' })
   }
 
-  return { ok: true, message: 'Pendaftaran berhasil. Panitia akan menghubungi ketua tim melalui WhatsApp.' }
+  return { ok: true, message: 'Pendaftaran berhasil dikirim. Panitia akan menghubungi ketua tim melalui WhatsApp.' }
 })

@@ -1,6 +1,4 @@
-import type { Category, RegistrationPayload } from '~/types/registration'
-
-export const useActiveCategory = () => useState<Category>('active-category', () => 'Web Development')
+import type { RegistrationPayload } from '~/types/registration'
 
 export const useRegistration = () => {
   const loading = ref(false)
