@@ -11,10 +11,24 @@ const fields: { key: Field; label: string; id: string; type: string; placeholder
   { key: 'instansi', label: 'Asal Instansi/Universitas', id: 'instansi', type: 'text', placeholder: 'Nama universitas atau instansi' }
 ]
 
-const blank = (): Record<Field, string> => ({ namaTim: '', kategori: '', namaKetua: '', whatsapp: '', instansi: '' })
+const activeCategory = useActiveCategory()
+
+const blank = (): Record<Field, string> => ({
+  namaTim: '',
+  kategori: activeCategory.value,
+  namaKetua: '',
+  whatsapp: '',
+  instansi: ''
+})
+
 const form = reactive(blank())
 const errors = reactive(blank())
 const touched = reactive<Record<Field, boolean>>({ namaTim: false, kategori: false, namaKetua: false, whatsapp: false, instansi: false })
+
+watch(activeCategory, (v) => {
+  form.kategori = v
+  errors.kategori = ''
+}, { immediate: true })
 
 const minLen = (min: number, label: string) => (v: string) =>
   v.trim().length < min ? `${label} minimal ${min} karakter.` : ''
@@ -34,6 +48,9 @@ const onBlur = (k: Field) => {
   check(k)
 }
 const onInput = (k: Field) => {
+  if (k === 'kategori' && (CATEGORIES as readonly string[]).includes(form.kategori)) {
+    activeCategory.value = form.kategori as Category
+  }
   if (touched[k]) check(k)
 }
 
@@ -88,7 +105,7 @@ const onSubmit = async () => {
               :aria-describedby="errors.kategori ? `${f.id}-error` : undefined"
               :class="[
                 'w-full rounded-sm border-2 bg-white px-4 py-3 font-sans text-ink outline-none transition-colors focus:ring-2 focus:ring-azure/40',
-                errors.kategori ? 'border-coral' : 'border-ink'
+                errors.kategori ? 'border-danger' : 'border-ink'
               ]"
               @input="onInput('kategori')"
               @blur="onBlur('kategori')"
@@ -107,12 +124,12 @@ const onSubmit = async () => {
               :aria-describedby="errors[f.key] ? `${f.id}-error` : undefined"
               :class="[
                 'w-full rounded-sm border-2 bg-white px-4 py-3 font-sans text-ink outline-none transition-colors focus:ring-2 focus:ring-azure/40',
-                errors[f.key] ? 'border-coral' : 'border-ink'
+                errors[f.key] ? 'border-danger' : 'border-ink'
               ]"
               @input="onInput(f.key)"
               @blur="onBlur(f.key)"
             />
-            <p v-if="errors[f.key]" :id="`${f.id}-error`" class="mt-1 font-sans text-sm font-medium text-coral">
+            <p v-if="errors[f.key]" :id="`${f.id}-error`" class="mt-1 font-sans text-sm font-medium text-danger">
               {{ errors[f.key] }}
             </p>
           </div>
@@ -122,12 +139,12 @@ const onSubmit = async () => {
           v-if="status !== 'idle'"
           :role="status === 'error' ? 'alert' : 'status'"
           :class="[
-            'mt-6 flex items-start justify-between gap-4 rounded-sm px-4 py-3 font-sans text-sm font-semibold',
-            status === 'success' ? 'bg-azure text-white' : 'bg-coral text-ink'
+            'mt-6 flex items-start justify-between gap-4 rounded-sm px-4 py-3 font-sans text-sm font-semibold text-white',
+            status === 'success' ? 'bg-ok' : 'bg-danger'
           ]"
         >
           <span>{{ message }}</span>
-          <button type="button" class="underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ink" @click="dismiss">Tutup</button>
+          <button type="button" class="underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white" @click="dismiss">Tutup</button>
         </div>
 
         <button

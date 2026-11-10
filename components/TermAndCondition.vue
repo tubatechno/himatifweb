@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { CATEGORIES, type Category } from '~/types/registration'
+import { CATEGORIES } from '~/types/registration'
 import { JUKNIS } from '~/data/juknis'
 
-const active = ref<Category>('Web Development')
+const active = useActiveCategory()
 const tabs = ref<HTMLButtonElement[]>([])
 const content = computed(() => JUKNIS[active.value])
 

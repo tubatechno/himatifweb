@@ -37,7 +37,7 @@ function doPost(e) {
       data.namaTim,
       data.kategori,
       data.namaKetua,
-      "'" + String(data.whatsapp),
+      String(data.whatsapp),
       data.instansi
     ]);
     return respond({ ok: true });
