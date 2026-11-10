@@ -1,22 +1,7 @@
 <script setup lang="ts">
 import { EVENT_DATA } from '~/data/event'
 
-const props = withDefaults(defineProps<{ targetId?: string }>(), { targetId: 'daftar' })
-
 const { countdown } = useEventCountdown(EVENT_DATA.tanggalMulai, EVENT_DATA.tanggalSelesai)
-
-const scrollToForm = () => {
-  const el = document.getElementById(props.targetId)
-  if (!el) return
-  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  el.scrollIntoView({ behavior: isReduced ? 'auto' : 'smooth', block: 'start' })
-  window.setTimeout(() => {
-    const input = document.getElementById('nama-tim')
-    if (input) {
-      input.focus({ preventScroll: true })
-    }
-  }, isReduced ? 50 : 600)
-}
 </script>
 
 <template>
@@ -90,20 +75,19 @@ const scrollToForm = () => {
       </div>
 
       <div class="mt-10 flex flex-wrap items-center gap-4">
-        <button
-          type="button"
-          class="rounded-sm bg-signal px-8 py-4 font-sans text-lg font-bold text-ink shadow-[6px_6px_0_0_#FF5C4D] transition-transform motion-reduce:transition-none hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0_0_#FF5C4D] focus:outline-none focus-visible:ring-4 focus-visible:ring-white"
-          @click="scrollToForm"
+        <NuxtLink
+          to="/lomba#daftar"
+          class="inline-flex items-center rounded-sm bg-signal px-8 py-4 font-sans text-lg font-bold text-ink shadow-[6px_6px_0_0_#FF5C4D] transition-transform motion-reduce:transition-none hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0_0_#FF5C4D] focus:outline-none focus-visible:ring-4 focus-visible:ring-white"
         >
           Daftar Sekarang
-        </button>
+        </NuxtLink>
 
-        <a
-          href="#juknis"
-          class="rounded-sm border-2 border-white px-6 py-4 font-sans text-lg font-bold text-white transition-colors hover:bg-white hover:text-ink focus:outline-none focus-visible:ring-4 focus-visible:ring-signal"
+        <NuxtLink
+          to="/lomba"
+          class="inline-flex items-center rounded-sm border-2 border-white px-6 py-4 font-sans text-lg font-bold text-white transition-colors hover:bg-white hover:text-ink focus:outline-none focus-visible:ring-4 focus-visible:ring-signal"
         >
-          Pelajari Juknis
-        </a>
+          Pelajari Lomba
+        </NuxtLink>
       </div>
     </div>
   </section>

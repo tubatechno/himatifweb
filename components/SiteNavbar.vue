@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { EVENT_DATA } from '~/data/event'
 
+const route = useRoute()
 const isOpen = ref(false)
 
 const toggleMenu = () => {
@@ -17,6 +18,10 @@ const onKeyDown = (e: KeyboardEvent) => {
   }
 }
 
+watch(() => route.fullPath, () => {
+  closeMenu()
+})
+
 onMounted(() => {
   window.addEventListener('keydown', onKeyDown)
 })
@@ -26,26 +31,18 @@ onUnmounted(() => {
 })
 
 const navLinks = [
-  { label: 'Tentang', href: '#tentang' },
-  { label: 'Juknis', href: '#juknis' },
-  { label: 'Jadwal', href: '#jadwal' },
-  { label: 'Lokasi', href: '#lokasi' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Kontak', href: '#kontak' }
+  { label: 'Beranda', href: '/' },
+  { label: 'Tentang', href: '/#tentang' },
+  { label: 'Lomba', href: '/lomba' },
+  { label: 'Jadwal', href: '/#jadwal' },
+  { label: 'Lokasi', href: '/#lokasi' },
+  { label: 'FAQ', href: '/#faq' }
 ]
 
-const scrollToForm = () => {
-  closeMenu()
-  const el = document.getElementById('daftar')
-  if (!el) return
-  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  el.scrollIntoView({ behavior: isReduced ? 'auto' : 'smooth', block: 'start' })
-  window.setTimeout(() => {
-    const input = document.getElementById('nama-tim')
-    if (input) {
-      input.focus({ preventScroll: true })
-    }
-  }, isReduced ? 50 : 600)
+const isLinkActive = (href: string) => {
+  if (href === '/') return route.path === '/' && !route.hash
+  if (href === '/lomba') return route.path.startsWith('/lomba')
+  return false
 }
 </script>
 
@@ -62,24 +59,27 @@ const scrollToForm = () => {
       </NuxtLink>
 
       <nav class="hidden items-center gap-6 md:flex" aria-label="Navigasi Utama">
-        <a
+        <NuxtLink
           v-for="link in navLinks"
           :key="link.href"
-          :href="link.href"
-          class="font-sans text-sm font-semibold text-white/90 transition-colors hover:text-signal focus:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+          :to="link.href"
+          :aria-current="isLinkActive(link.href) ? 'page' : undefined"
+          :class="[
+            'font-sans text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-signal',
+            isLinkActive(link.href) ? 'text-signal underline underline-offset-4' : 'text-white/90 hover:text-signal'
+          ]"
         >
           {{ link.label }}
-        </a>
+        </NuxtLink>
       </nav>
 
       <div class="flex items-center gap-3">
-        <button
-          type="button"
-          class="rounded-sm bg-signal px-4 py-2 font-sans text-sm font-bold text-ink shadow-[2px_2px_0_0_#FF5C4D] transition-transform motion-reduce:transition-none hover:translate-x-0.5 hover:translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-          @click="scrollToForm"
+        <NuxtLink
+          to="/lomba#daftar"
+          class="inline-flex items-center rounded-sm bg-signal px-4 py-2 font-sans text-sm font-bold text-ink shadow-[2px_2px_0_0_#FF5C4D] transition-transform motion-reduce:transition-none hover:translate-x-0.5 hover:translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           Daftar
-        </button>
+        </NuxtLink>
 
         <button
           type="button"
@@ -113,15 +113,19 @@ const scrollToForm = () => {
         class="border-t-2 border-ink bg-ink px-6 py-6 md:hidden"
       >
         <nav class="flex flex-col space-y-4" aria-label="Navigasi Seluler">
-          <a
+          <NuxtLink
             v-for="link in navLinks"
             :key="link.href"
-            :href="link.href"
-            class="rounded-sm px-3 py-2 font-sans text-base font-semibold text-white hover:bg-white/10 hover:text-signal focus:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+            :to="link.href"
+            :aria-current="isLinkActive(link.href) ? 'page' : undefined"
+            :class="[
+              'rounded-sm px-3 py-2 font-sans text-base font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-signal',
+              isLinkActive(link.href) ? 'bg-white/10 text-signal' : 'text-white hover:bg-white/10 hover:text-signal'
+            ]"
             @click="closeMenu"
           >
             {{ link.label }}
-          </a>
+          </NuxtLink>
         </nav>
       </div>
     </Transition>

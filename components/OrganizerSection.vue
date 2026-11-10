@@ -3,7 +3,7 @@ import { EVENT_DATA } from '~/data/event'
 </script>
 
 <template>
-  <section id="penyelenggara" class="border-b-2 border-ink bg-white px-6 py-20 md:py-28">
+  <section id="penyelenggara" class="scroll-mt-20 border-b-2 border-ink bg-white px-6 py-20 md:py-28">
     <div class="mx-auto max-w-5xl">
       <div class="text-center">
         <span class="rounded-sm bg-signal px-3 py-1 font-sans text-xs font-bold uppercase tracking-wider text-ink">

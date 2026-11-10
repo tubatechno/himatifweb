@@ -3,7 +3,7 @@ import { EVENT_DATA } from '~/data/event'
 </script>
 
 <template>
-  <section id="dokumentasi" class="border-b-2 border-ink bg-white px-6 py-20 md:py-28">
+  <section id="dokumentasi" class="scroll-mt-20 border-b-2 border-ink bg-white px-6 py-20 md:py-28">
     <div class="mx-auto max-w-5xl">
       <div class="rounded-sm border-2 border-ink bg-mist p-8 shadow-[6px_6px_0_0_#14183A] md:p-12">
         <div class="max-w-2xl">

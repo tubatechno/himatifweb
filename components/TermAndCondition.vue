@@ -17,7 +17,7 @@ const onKey = (e: KeyboardEvent, i: number) => {
 </script>
 
 <template>
-  <section id="juknis" class="border-b-2 border-ink bg-mist px-6 py-20 md:py-28">
+  <section id="juknis" class="scroll-mt-20 border-b-2 border-ink bg-mist px-6 py-16 md:py-24">
     <div class="mx-auto max-w-5xl">
       <div class="max-w-2xl">
         <span class="rounded-sm bg-azure px-3 py-1 font-sans text-xs font-bold uppercase tracking-wider text-white">
@@ -27,7 +27,7 @@ const onKey = (e: KeyboardEvent, i: number) => {
           Syarat & Ketentuan Lomba
         </h2>
         <p class="mt-3 font-sans text-base text-ink-600 md:text-lg">
-          Pilih kategori lomba di bawah ini untuk membaca rangkuman petunjuk teknis. Memilih tab akan otomatis menyesuaikan pilihan pada formulir pendaftaran.
+          Pilih kategori lomba di bawah ini untuk membaca petunjuk teknis lengkap. Pilihan tab akan otomatis menentukan kategori pada formulir pendaftaran di bawah.
         </p>
       </div>
 

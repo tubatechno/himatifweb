@@ -10,20 +10,15 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="min-h-screen bg-mist font-sans text-ink">
-    <SiteNavbar />
-    <main>
-      <Hero />
-      <AboutSection />
-      <TermAndCondition />
-      <ScheduleSection />
-      <RegistrationForm />
-      <DocumentationSection />
-      <LocationSection />
-      <OrganizerSection />
-      <FaqSection />
-      <ContactSection />
-    </main>
-    <SiteFooter />
-  </div>
+  <main>
+    <Hero />
+    <AboutSection />
+    <LombaPreview />
+    <ScheduleSection />
+    <DocumentationSection />
+    <LocationSection />
+    <OrganizerSection />
+    <FaqSection />
+    <ContactSection />
+  </main>
 </template>

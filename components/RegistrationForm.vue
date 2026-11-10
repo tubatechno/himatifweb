@@ -91,14 +91,14 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <section id="daftar" class="border-b-2 border-ink bg-mist px-6 py-20 md:py-28">
+  <section id="daftar" class="scroll-mt-20 border-b-2 border-ink bg-mist px-6 py-16 md:py-24">
     <div class="mx-auto grid max-w-5xl gap-12 md:grid-cols-5">
       <div class="md:col-span-2">
         <span class="rounded-sm bg-signal px-3 py-1 font-sans text-xs font-bold uppercase tracking-wider text-ink">
           Registrasi Tim
         </span>
         <h2 class="mt-4 font-display text-4xl font-extrabold text-ink md:text-5xl">
-          Daftarkan Tim Kamu
+          Formulir Pendaftaran
         </h2>
         <p class="mt-4 font-sans text-base leading-relaxed text-ink-600">
           Isi data tim dengan cermat. Seluruh komunikasi resmi dan verifikasi berkas akan dilakukan melalui WhatsApp ketua tim.

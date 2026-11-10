@@ -8,5 +8,8 @@
   "assets": {
     "directory": ".output/public",
     "binding": "ASSETS"
+  },
+  "build": {
+    "command": "npm run build"
   }
 }
